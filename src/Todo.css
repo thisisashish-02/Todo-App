@@ -1,0 +1,4 @@
+.Todo-completed {
+    color: lightgrey;
+    text-decoration: line-through;
+}
