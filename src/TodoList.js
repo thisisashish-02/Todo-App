@@ -10,11 +10,21 @@ class TodoList extends Component {
             todos: []
         };
         this.create = this.create.bind(this);
+        this.update = this.update.bind(this);
     }
     create(newTodo) {
         this.setState({
             todos: [...this.state.todos, { ...newTodo, id: uuid() }]
         });
+    }
+    update(id, updatedTask) {
+        const updateTodos = this.state.todos.map(todo => {
+            if (todo.id === id) {
+                return { ...todo, task: updatedTask }
+            }
+            return todo;
+        });
+        this.setState({ todos: updateTodos });
     }
     remove(id) {
         this.setState({
@@ -23,8 +33,16 @@ class TodoList extends Component {
     }
     render() {
         const todos = this.state.todos.map(todo => {
-            return <Todo key={todo.id} task={todo.task} removeTodo={() => this.remove(todo.id)} />
-        })
+            return (
+                <Todo
+                    key={todo.id}
+                    id={todo.id}
+                    task={todo.task}
+                    removeTodo={() => this.remove(todo.id)}
+                    updateTodo={this.update}
+                />
+            )
+        });
         return (
             <div>
                 <h1>Todo App</h1>
