@@ -5,7 +5,7 @@ class Todo extends Component {
         return (
             <div>
                 <button>Edit</button>
-                <button>X</button>
+                <button onClick={this.props.removeTodo}>X</button>
                 <li>{this.props.task}</li>
             </div>
         )
